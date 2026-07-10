@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://col5egg1k5ifq"]
+
+[ext_resource type="Script" uid="uid://c5ygl3o3ps1dy" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[node name="hud" type="Control" unique_id=525278667]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ahhtf")
+
+[node name="health" type="Label" parent="." unique_id=1377117933]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 31
+text = "placeholder"

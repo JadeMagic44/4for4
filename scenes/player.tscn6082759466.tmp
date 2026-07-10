@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ckb0hjl8h60pr"]
+
+[ext_resource type="Script" uid="uid://cbaoq0jhwpici" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://cp1oocsdnyqr0" path="res://art/tree-removebg-preview.png" id="2_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8flmo"]
+radius = 37.0
+height = 110.0
+
+[node name="player" type="CharacterBody2D" unique_id=484648485]
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1865871038]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1936910255]
+scale = Vector2(0.25, 0.25)
+shape = SubResource("CapsuleShape2D_8flmo")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1938995208]
+zoom = Vector2(1.5, 1.5)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1607553993]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://ckb0hjl8h60pr"]
+
+[ext_resource type="Script" uid="uid://cbaoq0jhwpici" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://col5egg1k5ifq" path="res://scenes/hud.tscn" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://ni65v1gsg6vt" path="res://art/icon.svg" id="3_qhqgy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8flmo"]
+radius = 100.0
+height = 424.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 25.0
+height = 106.0
+
+[node name="player" type="CharacterBody2D" unique_id=484648485]
+top_level = true
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1865871038]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1936910255]
+scale = Vector2(0.25, 0.25)
+shape = SubResource("CapsuleShape2D_8flmo")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1938995208]
+zoom = Vector2(1.5, 1.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=920869002]
+
+[node name="hud" parent="Camera2D/CanvasLayer" unique_id=525278667 instance=ExtResource("2_qhqgy")]
+
+[node name="aim" type="Sprite2D" parent="." unique_id=803288079]
+visible = false
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("3_qhqgy")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1064831241]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=970222084]
+shape = SubResource("CapsuleShape2D_dqkch")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
