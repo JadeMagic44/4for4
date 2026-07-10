@@ -10,7 +10,7 @@ var health
 var character = Global.characterAndWeapon
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var timer: Timer = $Timer
+# @onready var timer: Timer = $Timer # Unused/forgotten?
 
 #characters
 
@@ -36,11 +36,11 @@ func _process(_delta):
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("test"):
-		Global.playerHealth - 5
+		Global.playerHealth -= 5
 		print(Global.playerHealth)
 	
 	if hurt:
-		health = Global.take_damage(health, Global.dmg(5, 15, 10))
+		health = Global.take_damage(health, Global.damage_calc(5, 15, 10))
 		print(health)
 	
 	# remove reset input before export
@@ -87,7 +87,8 @@ func get_input():
 	return input.normalized()
 
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func _on_hitbox_body_entered(body : Node2D) -> void:
+	print("gagab")
 	if body == Global.enemyBody:
 		hurt = true
 
