@@ -1,17 +1,17 @@
 extends Node
-
+class Art:
+	var attack
+	var character
+	
+	func _init(atk, cha):
+		attack = atk
+		character = cha
 
 # bullet art
-var placeholderAttack = preload("res://art/icon.svg")
-var ZephyraAttack = preload("res://art/attack/ranged/Zephyra_attack.png")
-var YggdrasilAttack = preload("res://art/attack/melee/Forrest_Tree-attack.png")
-var MarkAttack = preload("res://art/attack/ranged/MarkAttack.png")
-
-# player art
-var placeholderCharacter = preload("res://art/characters/placeholder.png")
-var Yggdrasil = preload("res://art/characters/Forrest_character.png")
-var Zephyra = preload("res://art/characters/Zephyra_character.png")
-var Mark = preload("res://art/characters/Mark.png")
+var placeholder = Art.new(preload("res://art/icon.svg"), preload("res://art/characters/placeholder.png"))
+var Yggdrasil = Art.new(preload("res://art/attack/melee/Forrest_Tree-attack.png"), preload("res://art/characters/Forrest_character.png"))
+var Zephyra = Art.new(preload("res://art/attack/ranged/Zephyra_attack.png"), preload("res://art/characters/Zephyra_character.png"))
+var Mark = Art.new(preload("res://art/attack/ranged/MarkAttack.png"), preload("res://art/characters/Mark.png"))
 
 #scenes
 var bullet = preload("res://scenes/bullet.tscn")
