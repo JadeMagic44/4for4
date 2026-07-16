@@ -7,6 +7,8 @@ extends Node
 
 var playerHealth : float = 100
 var enemyHealth : float = 50
+var playerArt
+var bulletArt
 var characterAndWeapon: int = 0
 var playerBody : CharacterBody2D
 var enemyBody : CharacterBody2D
