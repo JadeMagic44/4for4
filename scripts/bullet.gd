@@ -9,14 +9,22 @@ var health = Global.playerHealth
 var weapon = Global.characterAndWeapon
 
 func _ready() -> void:
-	sprite.texture = Global.bulletArt
 	sprite.flip_h = false
+	match weapon:
+		1:
+			sprite.texture = Loaded.YggdrasilAttack
+		2:
+			sprite.texture = Loaded.ZephyraAttack
+		3:
+			sprite.texture = Loaded.MarkAttack
+		_:
+			sprite.texture = Loaded.placeholderAttacks
 
 func _process(delta: float) -> void:
 	position += transform.x*speed*delta
-	if sprite.texture == Loaded.Yggdrasil.attack:
+	if sprite.texture == Loaded.YggdrasilAttack:
 		sprite.rotation += 1
-	elif sprite.texture == Loaded.Mark.attack:
+	elif sprite.texture == Loaded.MarkAttack:
 		sprite.rotation -= 1
 	
 	

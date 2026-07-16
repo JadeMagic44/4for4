@@ -39,7 +39,6 @@ texture = ExtResource("3_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=970222084]
 shape = SubResource("CapsuleShape2D_dqkch")
-debug_color = Color(0.68073237, 0, 0.09623767, 0.73333335)
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

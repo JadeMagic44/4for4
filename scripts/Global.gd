@@ -7,15 +7,13 @@ extends Node
 
 var playerHealth : float = 100
 var enemyHealth : float = 50
-var playerArt
-var bulletArt
 var characterAndWeapon: int = 0
 var playerBody : CharacterBody2D
 var enemyBody : CharacterBody2D
 var sixbynine = 1.777777777777778 # 16/9
 
-func damage_calc(min_dmg : int, max_dmg : int, critChance : int):
-	var damage = randi_range(min_dmg, max_dmg)
+func dmg(min : int, max : int, critChance : int):
+	var damage = randi_range(min, max)
 	var crit = randi_range(1, 100)
 	if crit <= critChance:
 		damage *= 2
@@ -24,12 +22,11 @@ func damage_calc(min_dmg : int, max_dmg : int, critChance : int):
 		return damage
 
 func take_damage(health : int, dmg : int):
-	health -= dmg
+	health - dmg
 	if health <= 0:
 		pass
 	else:
 		return health
-
 func spawn_location(playerDistance, itemDistance, entity):
 	# create bounding boxes, playerDistance is the no spawn zone, while itemDistance is the spawn zone
 	var playerx = Vector2(playerBody.position.x - playerDistance, playerBody.position.x + playerDistance)
