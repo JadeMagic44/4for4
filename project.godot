@@ -1,9 +1,17 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
 
-config/name="4 for 4 v1"
-run/main_scene="uid://ddmjrpdrv8c85"
+config/name="4 for 4"
+run/main_scene="uid://ge1p03n8ybe4"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://o3tpnhcwkgd"
@@ -13,12 +21,26 @@ config/icon="uid://bbxrpj3etmmi3"
 
 Global="*uid://cn207e8n0fxbn"
 Loaded="*uid://ct08oden2epik"
+Debug="*uid://bee8axxj1ev48"
 
 [display]
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-neovim/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://art/": "yellow",
+"res://debug/": "orange",
+"res://scenes/": "red",
+"res://scripts/": "green"
+}
 
 [input]
 
@@ -45,11 +67,6 @@ down={
 left_mouse={
 "deadzone": 0.2,
 "events": [null, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
-]
-}
-reset={
-"deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 test={

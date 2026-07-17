@@ -6,28 +6,21 @@ var speed = 150
 var health = Global.playerHealth
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
-var weapon = Global.characterAndWeapon
 
 func _ready() -> void:
+	sprite.texture = Global.bulletArt
 	sprite.flip_h = false
-	match weapon:
-		1:
-			sprite.texture = Loaded.YggdrasilAttack
-		2:
-			sprite.texture = Loaded.ZephyraAttack
-		3:
-			sprite.texture = Loaded.MarkAttack
-		_:
-			sprite.texture = Loaded.placeholderAttacks
 
 func _process(delta: float) -> void:
 	position += transform.x*speed*delta
-	if sprite.texture == Loaded.YggdrasilAttack:
+	if sprite.texture == Loaded.Yggdrasil.attack:
 		sprite.rotation += 1
-	elif sprite.texture == Loaded.MarkAttack:
+	elif sprite.texture == Loaded.Mark.attack:
 		sprite.rotation -= 1
-	
-	
+	elif sprite.texture == Loaded.Taylor.attack:
+		sprite.rotation = deg_to_rad(180)
+	elif sprite.texture == Loaded.Zephyra.attack:
+		sprite.rotation = deg_to_rad(90)
 
 func Weapon():
 	if sprite.texture == Loaded.YggdrasilAttack:

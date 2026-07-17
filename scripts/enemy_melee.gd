@@ -5,7 +5,7 @@ var speed = 50.0
 func _ready() -> void:
 	Global.enemyBody = self
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	follow()
 	move_and_slide()
 

@@ -4,48 +4,30 @@ extends CharacterBody2D
 var speed = 7.0
 var input : Vector2
 var hurt : bool = false
-var health
+var health 
+var cooldown : bool = false
 @onready var Player: CharacterBody2D = $"."
 @onready var aim: Sprite2D = $aim
-var character = Global.characterAndWeapon
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var timer: Timer = $Timer
-
-#characters
-
+@onready var bullet_cooldown: Timer = $"bullet cooldown"
 
 func _ready():
+	sprite.texture = Global.playerArt
 	Global.playerBody = self
-	match character:
-		1:
-			sprite.texture = Loaded.Yggdrasil
-		2:
-			sprite.texture = Loaded.Zephyra
-		3:
-			sprite.texture = Loaded.Mark
-		_:
-			sprite.texture = Loaded.placeholderCharacter
 
 func _process(_delta):
 	player()
+	Debug.mode("select")
 	health = Global.playerHealth
 	var playerInput = get_input()
 	global_position += playerInput*speed
 	aim.look_at(get_global_mouse_position())
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("test"):
-		Global.playerHealth - 5
-		print(Global.playerHealth)
-	
 	if hurt:
-		health = Global.take_damage(health, Global.dmg(5, 15, 10))
+		Global.take_damage(health, Global.damage_calc(5, 15, 10))
 		print(health)
-	
-	# remove reset input before export
-	if Input.is_action_pressed("reset"):
-		get_tree().change_scene_to_file("res://scenes/character_select.tscn")
 	
 func spriteScale(a: float, b: float):
 	sprite.scale.x = a
@@ -55,15 +37,15 @@ func collisonSize(r: float, h: float):
 	collision.shape.height = h
 
 func player():
-	if sprite.texture == Loaded.placeholderCharacter:
+	if sprite.texture == Loaded.placeholder.character:
 		spriteScale(0.25, 0.25)
 		collisonSize(164.0, 408.0)
-	elif sprite.texture == Loaded.Yggdrasil:
+	elif sprite.texture == Loaded.Yggdrasil.character:
 		spriteScale(0.2, 0.208)
 		collisonSize(96.0, 368.0)
-	elif sprite.texture == Loaded.Zephyra:
+	elif sprite.texture == Loaded.Zephyra.character:
 		pass
-	elif sprite.texture == Loaded.Mark:
+	elif sprite.texture == Loaded.Mark.character:
 		collisonSize(100.0, 424.0)
 		spriteScale(0.25, 0.25)
 	
@@ -75,11 +57,13 @@ func Melee():
 	pass
 
 func shoot():
-	var bullet = Loaded.bullet.instantiate()
-	add_child(bullet)
-	bullet.position = Player.position
-	bullet.rotation = aim.rotation
-	
+	if cooldown == false:
+		cooldown = true
+		var bullet = Loaded.bullet.instantiate()
+		add_child(bullet)
+		bullet.position = Player.position
+		bullet.rotation = aim.rotation
+		bullet_cooldown.start()
 
 func get_input():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -87,11 +71,15 @@ func get_input():
 	return input.normalized()
 
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body == Global.enemyBody:
+func _on_bullet_cooldown_timeout() -> void:
+	cooldown = false
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.has_method("MeleeEnemyHitBox"):
 		hurt = true
 
 
-func _on_hitbox_body_exited(body: Node2D) -> void:
-	if body == Global.enemyBody:
+func _on_hitbox_area_exited(area: Area2D) -> void:
+	if area.has_method("MeleeEnemyHitBox"):
 		hurt = false

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgxy64ywdeb4f" path="res://scripts/enemy_melee.gd" id="1_qcgh8"]
 [ext_resource type="Texture2D" uid="uid://dg7ihdnmi0gk6" path="res://art/enemy/EnemyMelee.png" id="1_yws7p"]
+[ext_resource type="Script" uid="uid://s8m47tc7gb8w" path="res://scripts/hitbox.gd" id="3_wm50o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f74ue"]
 
@@ -17,11 +18,11 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_yws7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=269810496]
-visible = false
 shape = SubResource("CircleShape2D_f74ue")
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=762622717]
+script = ExtResource("3_wm50o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=25032689]
 shape = SubResource("CapsuleShape2D_yws7p")
