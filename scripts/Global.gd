@@ -24,11 +24,9 @@ func damage_calc(min_dmg : int, max_dmg : int, critChance : int):
 		return damage
 
 func take_damage(health : int, dmg : int):
-	health -= dmg
 	if health <= 0:
-		pass
-	else:
-		return health
+		return
+	playerHealth -= dmg
 
 func spawn_location(playerDistance, itemDistance, entity):
 	# create bounding boxes, playerDistance is the no spawn zone, while itemDistance is the spawn zone
